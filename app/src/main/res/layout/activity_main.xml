@@ -58,7 +58,7 @@
             android:text="Description" />
 
         <EditText
-            android:id="@+id/txt_description"
+            android:id="@+id/description"
             android:layout_margin="2dp"
             android:padding="10dp"
             android:inputType="textMultiLine|textCapSentences"

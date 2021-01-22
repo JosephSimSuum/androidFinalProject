@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -39,5 +40,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     //material desing
     implementation 'com.google.android.material:material:1.2.1'
+    //implementation 'com.google.android.gms:play-services-vision:18.0.0'
+    implementation 'com.google.android.gms:play-services-vision:20.1.2'
+    //firebase
+    implementation 'com.google.firebase:firebase-firestore:21.4.0'
 
 }
