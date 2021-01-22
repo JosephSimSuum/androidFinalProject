@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bottom_navigation"
-        app:itemBackground="@color/design_default_color_primary"
+        app:itemBackground="@color/blue"
         app:itemTextColor="@drawable/selecot"
         app:itemIconTint="@drawable/selecot"
         app:menu="@menu/menu_navigator"
