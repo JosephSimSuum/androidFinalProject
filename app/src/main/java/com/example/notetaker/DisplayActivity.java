@@ -1,5 +1,6 @@
 package com.example.notetaker;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -23,8 +24,8 @@ public class DisplayActivity extends AppCompatActivity {
             pId=bundle.getString("pId");
             pTitle=bundle.getString("pTitle");
             pDescription=bundle.getString("pDescription");
-
-            title.setText(pTitle);
+            ActionBar actionBar=getSupportActionBar();
+            actionBar.setTitle(pTitle);
             description.setText(pDescription);
         }else {
             title.setText("No Data");
