@@ -98,20 +98,41 @@ public class MainActivity extends AppCompatActivity {
 
         //progress dialog
         pd=new ProgressDialog(this);
-
         //firestore
         db = FirebaseFirestore.getInstance();
+        //update data using Bundle
+        Bundle bundle1=getIntent().getExtras();
+        if(bundle1!=null){
+            mSave.setText("Update");
+            pId=bundle1.getString("pId");
+            pTitle=bundle1.getString("pTitle");
+            pDescription=bundle1.getString("pDescription");
+
+            mTitle.setText(pTitle);
+            mDescription.setText(pDescription);
+        }else {
+            mSave.setText("Save");
+        }
 
         //click save button to upload data
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle1=getIntent().getExtras();
-                //input data
-                String title=mTitle.getText().toString().trim();
-                String description=mDescription.getText().toString().trim();
-                //fucntion to upload data
-                uploadData(title,description);
+                //Bundle bundle1=getIntent().getExtras();
+                if(bundle1!=null){
+                    //update to cloudstore
+                    String id=pId;
+                    String title=mTitle.getText().toString().trim();
+                    String description=mDescription.getText().toString().trim();
+                    updateData(id,title,description);
+                }else {
+                    //input data
+                    String title=mTitle.getText().toString().trim();
+                    String description=mDescription.getText().toString().trim();
+                    //fucntion to upload data
+                    uploadData(title,description);
+
+                }
             }
         });
 
@@ -127,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.list:
-                        startActivity(new Intent(getApplicationContext(),List.class));
+                        startActivity(new Intent(getApplicationContext(), ListActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.home:
@@ -138,6 +159,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void updateData(String id, String title, String description) {
+        //set title progress bar
+        pd.setTitle("Updating Data ");
+        pd.show();
+
+        db.collection("Documents").document(id)
+                .update("title",title, "description",description)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        pd.dismiss();
+                        Toast.makeText(MainActivity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
+                        mTitle.setText("");
+                        mDescription.setText("");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        pd.dismiss();
+                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     private void openCamera() {
         ContentValues values=new ContentValues();
         values.put(MediaStore.Images.Media.TITLE,"New Pic");
@@ -217,7 +264,8 @@ public class MainActivity extends AppCompatActivity {
                         // this called when data is added successfully
                         pd.dismiss();
                         Toast.makeText(MainActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
-
+                        mTitle.setText("");
+                        mDescription.setText("");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

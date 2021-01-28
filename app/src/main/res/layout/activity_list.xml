@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".List">
-    <TextView
-        android:layout_width="wrap_content"
+    tools:context=".ListActivity">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="List"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true" />
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" />
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
