@@ -30,6 +30,7 @@ import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     //design component
     EditText mTitle, mDescription;
     Button mSave,mScan,mCamera;
+    FloatingActionButton camera;
 
     //progress dialog
     ProgressDialog pd;
@@ -67,11 +69,11 @@ public class MainActivity extends AppCompatActivity {
 
         //intialize image
         pImage= findViewById(R.id.imageView);
-        mCamera=findViewById(R.id.cameraBtn);
+        camera=findViewById(R.id.camera);
 
 
         //Camera permission
-        mCamera.setOnClickListener(new View.OnClickListener() {
+        camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
@@ -130,7 +132,14 @@ public class MainActivity extends AppCompatActivity {
                     String title=mTitle.getText().toString().trim();
                     String description=mDescription.getText().toString().trim();
                     //fucntion to upload data
-                    uploadData(title,description);
+                    if(title.isEmpty() || description.isEmpty()){
+                        Toast.makeText(MainActivity.this, "Text field cannot empty", Toast.LENGTH_SHORT).show();
+
+                    }else{
+                        uploadData(title,description);
+
+                    }
+
 
                 }
             }
