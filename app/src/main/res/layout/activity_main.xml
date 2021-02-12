@@ -78,12 +78,6 @@
         app:menu="@menu/menu_navigator"
         android:layout_gravity="bottom"
         app:navigationIcon="@drawable/ic_home">
-<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--            android:id="@+id/camera"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:src="@drawable/ic_camera" />-->
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -93,6 +87,8 @@
         android:layout_marginRight="1dp"
         android:layout_gravity="bottom|right"
         android:layout_marginBottom="70dp"
+        app:backgroundTint="@color/blue"
+        app:tint="@android:color/white"
         android:src="@drawable/ic_camera" />
 
 
